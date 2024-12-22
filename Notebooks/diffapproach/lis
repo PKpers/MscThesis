@@ -1,0 +1,197 @@
+BasisDirectory[lis] = StringDrop[DirectoryName[$Input], -1]
+lis /: BasisSectors[lis] := Get[StringJoin[BasisDirectory[lis], 
+    "/BasisSectors[lis]"]]
+lis /: CurrentState[lis] := <|NewDsBasis -> True, GenerateIBP -> True, 
+   AnalyzeSectors -> True, FindSymmetries -> False|>
+lis /: CutDs[lis] := {1, 1, 1, 1, 1, 1, 0, 0, 0}
+lis /: Definitions[lis] := {Hold[MetricTensor[] === d, SetDim[d]], 
+   Hold[VecQ[l1], Declare[l1, Vector]], Hold[VecQ[l2], Declare[l2, Vector]], 
+   Hold[VecQ[a], Declare[a, Vector]], Hold[VecQ[q], Declare[q, Vector]], 
+   Hold[VecQ[v2], Declare[v2, Vector]], 
+   Hold[LiteRed`Private`ExpresionType[a] === LiteRed`Private`ExpresionType[
+      a], Declare[a, LiteRed`Private`ExpresionType[a]]], 
+   Hold[LiteRed`Private`ExpresionType[q] === LiteRed`Private`ExpresionType[
+      q], Declare[q, LiteRed`Private`ExpresionType[q]]], 
+   Hold[LiteRed`Private`ExpresionType[v2] === LiteRed`Private`ExpresionType[
+      v2], Declare[v2, LiteRed`Private`ExpresionType[v2]]], 
+   Hold[LiteRed`Private`ExpresionType[y2] === LiteRed`Private`ExpresionType[
+      y2], Declare[y2, LiteRed`Private`ExpresionType[y2]]], 
+   Hold[LiteRed`Private`ExpresionType[y5] === LiteRed`Private`ExpresionType[
+      y5], Declare[y5, LiteRed`Private`ExpresionType[y5]]], 
+   Hold[LiteRed`Private`ExpresionType[y6] === LiteRed`Private`ExpresionType[
+      y6], Declare[y6, LiteRed`Private`ExpresionType[y6]]], 
+   Hold[LiteRed`Private`ExpresionType[y7] === LiteRed`Private`ExpresionType[
+      y7], Declare[y7, LiteRed`Private`ExpresionType[y7]]], 
+   Hold[sp[a, a] === y2, sp[a, a] = y2], Hold[sp[q, q] === y7, 
+    sp[q, q] = y7], Hold[sp[v2, v2] === 1, sp[v2, v2] = 1], 
+   Hold[sp[a, q] === y5, sp[a, q] = y5], Hold[sp[a, v2] === 0, 
+    sp[a, v2] = 0], Hold[sp[q, v2] === y6, sp[q, v2] = y6]}
+lis /: Ds[lis] := {-t + sp[a, l1] + sp[a, l2], sp[l1, v2], sp[l2, v2], 
+   sp[l1, l1], sp[l2, l2], sp[-l1 - l2 + q, -l1 - l2 + q], 
+   sp[l1 + l2, l1 + l2], sp[a, l1], sp[l1, q]}
+lis /: DsBasisQ[lis] := True
+lis /: EMs[lis] := {a, q, v2}
+lis /: ExtMappedSectors[lis] := {}
+lis /: ExtSectorsMappings[lis] := {}
+lis /: IBP[lis] := Get[StringJoin[BasisDirectory[lis], "/IBP[lis]"]]
+lis /: Information[lis] := (If[ValueQ[lis::usage], 
+    Information[lis, LongForm -> False]]; 
+   Print[Grid[Partition[Union[Replace[Replace[First /@ UpValues[lis] /. 
+          HoldPattern -> HoldForm, 
+         {HoldPattern[HoldForm[(LiteRed`Private`f$_)[lis, __]]] :> 
+           HoldForm[LiteRed`Private`f$[lis, "\[Ellipsis]"]]}, {1}], 
+        {HoldPattern[LiteRed`Private`x$:HoldForm[(LiteRed`Private`f$_)[lis, 
+              ___]]] :> Button[LiteRed`Private`x$, 
+           (SelectionMove[ButtonNotebook[], All, GeneratedCell]; 
+             NotebookDelete[]; Information[Evaluate[LiteRed`Private`x$[[1,
+                0]]], LongForm -> False]; Print[TableForm[Cases[UpValues[
+                  lis], HoldPattern[LiteRed`Private`a$_ :> 
+                    LiteRed`Private`b$_] /; MatchQ[LiteRed`Private`a$[[1,0]], 
+                   LiteRed`Private`x$[[1,0]]]] /. HoldPattern -> 
+                 HoldForm]]) & , Appearance -> "Frameless", 
+           BaseStyle -> "InformationLink"]}, {1}]], 5], 
+     DefaultBaseStyle -> "InfoGrid"]])
+lis /: jRules[lis, 1, 1, 1, 1, 1, 1, 0, 0, 0] := 
+  Get[StringJoin[BasisDirectory[lis], 
+    "/jRules[lis, 1, 1, 1, 1, 1, 1, 0, 0, 0]"]]
+lis /: jRules[lis, 1, 1, 1, 1, 1, 1, 1, 0, 0] := 
+  Get[StringJoin[BasisDirectory[lis], 
+    "/jRules[lis, 1, 1, 1, 1, 1, 1, 1, 0, 0]"]]
+lis /: jsOrder[lis] := {"np", "cp", "-ds", "-ns"}
+lis /: jsOrder[lis, 0, 1, 1, 1, 1, 1, 0, 0, 0] := 
+  {{-1, 1, 1, 1, 1, 1, -1, -1, -1}, {-1, 0, 0, 0, 0, 0, -1, -1, -1}, 
+   {0, -1, 0, 0, 0, 0, 0, 0, 0}, {0, 0, -1, 0, 0, 0, 0, 0, 0}, 
+   {0, 0, 0, -1, 0, 0, 0, 0, 0}, {0, 0, 0, 0, -1, 0, 0, 0, 0}, 
+   {1, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 1, 0, 0}, 
+   {0, 0, 0, 0, 0, 0, 0, 1, 0}}
+lis /: jsOrder[lis, 0, 1, 1, 1, 1, 1, 1, 0, 0] := 
+  {{-1, 1, 1, 1, 1, 1, 1, -1, -1}, {-1, 0, 0, 0, 0, 0, 0, -1, -1}, 
+   {0, 1, 1, 1, 1, 1, 0, 0, 0}, {0, -1, 0, 0, 0, 0, 0, 0, 0}, 
+   {0, 0, -1, 0, 0, 0, 0, 0, 0}, {0, 0, 0, -1, 0, 0, 0, 0, 0}, 
+   {0, 0, 0, 0, -1, 0, 0, 0, 0}, {1, 0, 0, 0, 0, 0, 0, 0, 0}, 
+   {0, 0, 0, 0, 0, 0, 0, 1, 0}}
+lis /: jsOrder[lis, 1, 0, 1, 1, 1, 1, 0, 0, 0] := 
+  {{1, -1, 1, 1, 1, 1, -1, -1, -1}, {0, -1, 0, 0, 0, 0, -1, -1, -1}, 
+   {-1, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, -1, 0, 0, 0, 0, 0, 0}, 
+   {0, 0, 0, -1, 0, 0, 0, 0, 0}, {0, 0, 0, 0, -1, 0, 0, 0, 0}, 
+   {0, 1, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 1, 0, 0}, 
+   {0, 0, 0, 0, 0, 0, 0, 1, 0}}
+lis /: jsOrder[lis, 1, 0, 1, 1, 1, 1, 1, 0, 0] := 
+  {{1, -1, 1, 1, 1, 1, 1, -1, -1}, {0, -1, 0, 0, 0, 0, 0, -1, -1}, 
+   {1, 0, 1, 1, 1, 1, 0, 0, 0}, {-1, 0, 0, 0, 0, 0, 0, 0, 0}, 
+   {0, 0, -1, 0, 0, 0, 0, 0, 0}, {0, 0, 0, -1, 0, 0, 0, 0, 0}, 
+   {0, 0, 0, 0, -1, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0, 0, 0, 0}, 
+   {0, 0, 0, 0, 0, 0, 0, 1, 0}}
+lis /: jsOrder[lis, 1, 1, 0, 1, 1, 1, 0, 0, 0] := 
+  {{1, 1, -1, 1, 1, 1, -1, -1, -1}, {0, 0, -1, 0, 0, 0, -1, -1, -1}, 
+   {-1, 0, 0, 0, 0, 0, 0, 0, 0}, {0, -1, 0, 0, 0, 0, 0, 0, 0}, 
+   {0, 0, 0, -1, 0, 0, 0, 0, 0}, {0, 0, 0, 0, -1, 0, 0, 0, 0}, 
+   {0, 0, 1, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 1, 0, 0}, 
+   {0, 0, 0, 0, 0, 0, 0, 1, 0}}
+lis /: jsOrder[lis, 1, 1, 0, 1, 1, 1, 1, 0, 0] := 
+  {{1, 1, -1, 1, 1, 1, 1, -1, -1}, {0, 0, -1, 0, 0, 0, 0, -1, -1}, 
+   {1, 1, 0, 1, 1, 1, 0, 0, 0}, {-1, 0, 0, 0, 0, 0, 0, 0, 0}, 
+   {0, -1, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, -1, 0, 0, 0, 0, 0}, 
+   {0, 0, 0, 0, -1, 0, 0, 0, 0}, {0, 0, 1, 0, 0, 0, 0, 0, 0}, 
+   {0, 0, 0, 0, 0, 0, 0, 1, 0}}
+lis /: jsOrder[lis, 1, 1, 1, 0, 1, 1, 0, 0, 0] := 
+  {{1, 1, 1, -1, 1, 1, -1, -1, -1}, {0, 0, 0, -1, 0, 0, -1, -1, -1}, 
+   {-1, 0, 0, 0, 0, 0, 0, 0, 0}, {0, -1, 0, 0, 0, 0, 0, 0, 0}, 
+   {0, 0, -1, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, -1, 0, 0, 0, 0}, 
+   {0, 0, 0, 1, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 1, 0, 0}, 
+   {0, 0, 0, 0, 0, 0, 0, 1, 0}}
+lis /: jsOrder[lis, 1, 1, 1, 0, 1, 1, 1, 0, 0] := 
+  {{1, 1, 1, -1, 1, 1, 1, -1, -1}, {0, 0, 0, -1, 0, 0, 0, -1, -1}, 
+   {1, 1, 1, 0, 1, 1, 0, 0, 0}, {-1, 0, 0, 0, 0, 0, 0, 0, 0}, 
+   {0, -1, 0, 0, 0, 0, 0, 0, 0}, {0, 0, -1, 0, 0, 0, 0, 0, 0}, 
+   {0, 0, 0, 0, -1, 0, 0, 0, 0}, {0, 0, 0, 1, 0, 0, 0, 0, 0}, 
+   {0, 0, 0, 0, 0, 0, 0, 1, 0}}
+lis /: jsOrder[lis, 1, 1, 1, 1, 0, 1, 0, 0, 0] := 
+  {{1, 1, 1, 1, -1, 1, -1, -1, -1}, {0, 0, 0, 0, -1, 0, -1, -1, -1}, 
+   {-1, 0, 0, 0, 0, 0, 0, 0, 0}, {0, -1, 0, 0, 0, 0, 0, 0, 0}, 
+   {0, 0, -1, 0, 0, 0, 0, 0, 0}, {0, 0, 0, -1, 0, 0, 0, 0, 0}, 
+   {0, 0, 0, 0, 1, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 1, 0, 0}, 
+   {0, 0, 0, 0, 0, 0, 0, 1, 0}}
+lis /: jsOrder[lis, 1, 1, 1, 1, 0, 1, 1, 0, 0] := 
+  {{1, 1, 1, 1, -1, 1, 1, -1, -1}, {0, 0, 0, 0, -1, 0, 0, -1, -1}, 
+   {1, 1, 1, 1, 0, 1, 0, 0, 0}, {-1, 0, 0, 0, 0, 0, 0, 0, 0}, 
+   {0, -1, 0, 0, 0, 0, 0, 0, 0}, {0, 0, -1, 0, 0, 0, 0, 0, 0}, 
+   {0, 0, 0, -1, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 1, 0, 0, 0, 0}, 
+   {0, 0, 0, 0, 0, 0, 0, 1, 0}}
+lis /: jsOrder[lis, 1, 1, 1, 1, 1, 0, 0, 0, 0] := 
+  {{1, 1, 1, 1, 1, -1, -1, -1, -1}, {0, 0, 0, 0, 0, -1, -1, -1, -1}, 
+   {-1, 0, 0, 0, 0, 0, 0, 0, 0}, {0, -1, 0, 0, 0, 0, 0, 0, 0}, 
+   {0, 0, -1, 0, 0, 0, 0, 0, 0}, {0, 0, 0, -1, 0, 0, 0, 0, 0}, 
+   {0, 0, 0, 0, 0, 1, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 1, 0, 0}, 
+   {0, 0, 0, 0, 0, 0, 0, 1, 0}}
+lis /: jsOrder[lis, 1, 1, 1, 1, 1, 0, 1, 0, 0] := 
+  {{1, 1, 1, 1, 1, -1, 1, -1, -1}, {0, 0, 0, 0, 0, -1, 0, -1, -1}, 
+   {1, 1, 1, 1, 1, 0, 0, 0, 0}, {-1, 0, 0, 0, 0, 0, 0, 0, 0}, 
+   {0, -1, 0, 0, 0, 0, 0, 0, 0}, {0, 0, -1, 0, 0, 0, 0, 0, 0}, 
+   {0, 0, 0, -1, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 1, 0, 0, 0}, 
+   {0, 0, 0, 0, 0, 0, 0, 1, 0}}
+lis /: jsOrder[lis, 1, 1, 1, 1, 1, 1, 0, 0, 0] := 
+  {{1, 1, 1, 1, 1, 1, -1, -1, -1}, {0, 0, 0, 0, 0, 0, -1, -1, -1}, 
+   {-1, 0, 0, 0, 0, 0, 0, 0, 0}, {0, -1, 0, 0, 0, 0, 0, 0, 0}, 
+   {0, 0, -1, 0, 0, 0, 0, 0, 0}, {0, 0, 0, -1, 0, 0, 0, 0, 0}, 
+   {0, 0, 0, 0, -1, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 1, 0, 0}, 
+   {0, 0, 0, 0, 0, 0, 0, 1, 0}}
+lis /: jsOrder[lis, 1, 1, 1, 1, 1, 1, 1, 0, 0] := 
+  {{1, 1, 1, 1, 1, 1, 1, -1, -1}, {0, 0, 0, 0, 0, 0, 0, -1, -1}, 
+   {1, 1, 1, 1, 1, 1, 0, 0, 0}, {-1, 0, 0, 0, 0, 0, 0, 0, 0}, 
+   {0, -1, 0, 0, 0, 0, 0, 0, 0}, {0, 0, -1, 0, 0, 0, 0, 0, 0}, 
+   {0, 0, 0, -1, 0, 0, 0, 0, 0}, {0, 0, 0, 0, -1, 0, 0, 0, 0}, 
+   {0, 0, 0, 0, 0, 0, 0, 1, 0}}
+lis /: jSymmetries[lis, 1, 1, 1, 1, 1, 1, 0, 0, 0] := 
+  Get[StringJoin[BasisDirectory[lis], 
+    "/jSymmetries[lis, 1, 1, 1, 1, 1, 1, 0, 0, 0]"]]
+lis /: jSymmetries[lis, 1, 1, 1, 1, 1, 1, 1, 0, 0] := 
+  Get[StringJoin[BasisDirectory[lis], 
+    "/jSymmetries[lis, 1, 1, 1, 1, 1, 1, 1, 0, 0]"]]
+lis /: LI[lis] := Get[StringJoin[BasisDirectory[lis], "/LI[lis]"]]
+lis /: LMs[lis] := {l1, l2}
+lis /: MappedSectors[lis] := Get[StringJoin[BasisDirectory[lis], 
+    "/MappedSectors[lis]"]]
+lis /: MIs[lis] := Get[StringJoin[BasisDirectory[lis], "/MIs[lis]"]]
+lis /: NDs[lis] := 9
+lis /: NonZeroSectors[lis] := Get[StringJoin[BasisDirectory[lis], 
+    "/NonZeroSectors[lis]"]]
+lis /: Parameters[lis] := {t, y2, y5, y6, y7, d}
+lis /: PowerShifts[lis] := {0, 0, 0, 0, 0, 0, 0, 0, 0}
+lis /: SectorsMappings[lis] := {}
+lis /: SectorsPattern[lis] := {_, _, _, _, _, _, _, 0, 0}
+lis /: SimpleSectors[lis] := Get[StringJoin[BasisDirectory[lis], 
+    "/SimpleSectors[lis]"]]
+lis /: SPs[lis] := {sp[a, l1], sp[a, l2], sp[l1, l1], sp[l1, l2], sp[l1, q], 
+   sp[l1, v2], sp[l2, l2], sp[l2, q], sp[l2, v2]}
+lis /: SR[lis] := Get[StringJoin[BasisDirectory[lis], "/SR[lis]"]]
+lis /: Toj[lis] := {sp[a, l1] -> j[lis, 0, 0, 0, 0, 0, 0, 0, -1, 0], 
+   sp[a, l2] -> t + j[lis, -1, 0, 0, 0, 0, 0, 0, 0, 0] - 
+     j[lis, 0, 0, 0, 0, 0, 0, 0, -1, 0], sp[l1, l1] -> 
+    j[lis, 0, 0, 0, -1, 0, 0, 0, 0, 0], sp[l1, l2] -> 
+    (-j[lis, 0, 0, 0, -1, 0, 0, 0, 0, 0] - j[lis, 0, 0, 0, 0, -1, 0, 0, 0, 
+       0] + j[lis, 0, 0, 0, 0, 0, 0, -1, 0, 0])/2, 
+   sp[l1, q] -> j[lis, 0, 0, 0, 0, 0, 0, 0, 0, -1], 
+   sp[l1, v2] -> j[lis, 0, -1, 0, 0, 0, 0, 0, 0, 0], 
+   sp[l2, l2] -> j[lis, 0, 0, 0, 0, -1, 0, 0, 0, 0], 
+   sp[l2, q] -> (y7 - j[lis, 0, 0, 0, 0, 0, -1, 0, 0, 0] + 
+      j[lis, 0, 0, 0, 0, 0, 0, -1, 0, 0] - 2*j[lis, 0, 0, 0, 0, 0, 0, 0, 0, 
+        -1])/2, sp[l2, v2] -> j[lis, 0, 0, -1, 0, 0, 0, 0, 0, 0]}
+lis /: UniqueSectors[lis] := Get[StringJoin[BasisDirectory[lis], 
+    "/UniqueSectors[lis]"]]
+lis /: ZerojRule[lis] := LiteRed`Private`jjj:j[lis, __] :> 
+   0 /; Module[{LiteRed`Private`jjs = 
+       Rest[List @@ jSector[LiteRed`Private`jjj]]}, 
+     Or @@ (BitOr[LiteRed`Private`jjs, #1] === #1 & ) /@ 
+       {{1, 1, 1, 1, 1, 0, 1, 0, 0}, {1, 1, 1, 1, 0, 1, 1, 0, 0}, 
+        {1, 1, 1, 0, 1, 1, 1, 0, 0}, {1, 1, 0, 1, 1, 1, 1, 0, 0}, 
+        {1, 0, 1, 1, 1, 1, 1, 0, 0}, {0, 1, 1, 1, 1, 1, 1, 0, 0}}]
+lis /: ZeroSectors[lis] := Get[StringJoin[BasisDirectory[lis], 
+    "/ZeroSectors[lis]"]]
+lis /: SectorsMappings[lis, LiteRed`Private`ns$:(0 | 1)..] := 
+  Cases[SectorsMappings[lis], HoldPattern[js[lis, LiteRed`Private`ns$] -> _]]
+lis::usage = "2-loop basis with 3 external momenta.\nUse Information[lis] to \
+get basis summary.\nThis string can be redefined by setting \
+lis::usage=\"\[Ellipsis]\""; Information[lis, LongForm -> False]; 
+LiteRed`Private`CheckDefs[lis]
+BasisDirectory[lis]
