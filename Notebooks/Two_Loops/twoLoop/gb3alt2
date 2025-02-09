@@ -1,0 +1,132 @@
+BasisDirectory[gb3alt2] = StringDrop[DirectoryName[$Input], -1]
+gb3alt2 /: BasisSectors[gb3alt2] := Get[StringJoin[BasisDirectory[gb3alt2], 
+    "/BasisSectors[gb3alt2]"]]
+gb3alt2 /: CurrentState[gb3alt2] := <|NewDsBasis -> True, 
+   GenerateIBP -> True, AnalyzeSectors -> True, FindSymmetries -> False|>
+gb3alt2 /: CutDs[gb3alt2] := {1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+   0, 0}
+gb3alt2 /: Definitions[gb3alt2] := {Hold[MetricTensor[] === d, SetDim[d]], 
+   Hold[VecQ[l1], Declare[l1, Vector]], Hold[VecQ[l2], Declare[l2, Vector]], 
+   Hold[VecQ[q], Declare[q, Vector]], Hold[VecQ[a], Declare[a, Vector]], 
+   Hold[VecQ[b], Declare[b, Vector]], Hold[VecQ[v1], Declare[v1, Vector]], 
+   Hold[VecQ[v2], Declare[v2, Vector]], 
+   Hold[LiteRed`Private`ExpresionType[a] === LiteRed`Private`ExpresionType[
+      a], Declare[a, LiteRed`Private`ExpresionType[a]]], 
+   Hold[LiteRed`Private`ExpresionType[b] === LiteRed`Private`ExpresionType[
+      b], Declare[b, LiteRed`Private`ExpresionType[b]]], 
+   Hold[LiteRed`Private`ExpresionType[v1] === LiteRed`Private`ExpresionType[
+      v1], Declare[v1, LiteRed`Private`ExpresionType[v1]]], 
+   Hold[LiteRed`Private`ExpresionType[v2] === LiteRed`Private`ExpresionType[
+      v2], Declare[v2, LiteRed`Private`ExpresionType[v2]]], 
+   Hold[LiteRed`Private`ExpresionType[y1] === LiteRed`Private`ExpresionType[
+      y1], Declare[y1, LiteRed`Private`ExpresionType[y1]]], 
+   Hold[LiteRed`Private`ExpresionType[y2] === LiteRed`Private`ExpresionType[
+      y2], Declare[y2, LiteRed`Private`ExpresionType[y2]]], 
+   Hold[LiteRed`Private`ExpresionType[y4] === LiteRed`Private`ExpresionType[
+      y4], Declare[y4, LiteRed`Private`ExpresionType[y4]]], 
+   Hold[sp[a, a] === y2, sp[a, a] = y2], Hold[sp[b, b] === -1, 
+    sp[b, b] = -1], Hold[sp[v1, v1] === 1, sp[v1, v1] = 1], 
+   Hold[sp[v2, v2] === 1, sp[v2, v2] = 1], Hold[sp[a, b] === y4, 
+    sp[a, b] = y4], Hold[sp[a, v1] === 0, sp[a, v1] = 0], 
+   Hold[sp[a, v2] === 0, sp[a, v2] = 0], Hold[sp[b, v1] === 0, 
+    sp[b, v1] = 0], Hold[sp[b, v2] === 0, sp[b, v2] = 0], 
+   Hold[sp[v1, v2] === y1, sp[v1, v2] = y1]}
+gb3alt2 /: Ds[gb3alt2] := {sp[l1, v2], sp[l2, v2], sp[q, v1], sp[q, v2], 
+   sp[l1, l1], sp[l2, l2], sp[-l1 - l2 + q, -l1 - l2 + q], sp[q, q], 
+   sp[l1 + l2, l1 + l2], sp[a, l1 + l2] + sp[b, q], sp[b, l1], sp[b, l2], 
+   sp[a, q], sp[l1, v1], sp[l2, v1], sp[l1, q], sp[a, l1], sp[a, l2]}
+gb3alt2 /: DsBasisQ[gb3alt2] := True
+gb3alt2 /: EMs[gb3alt2] := {a, b, v1, v2}
+gb3alt2 /: ExtMappedSectors[gb3alt2] := {}
+gb3alt2 /: ExtSectorsMappings[gb3alt2] := {}
+gb3alt2 /: IBP[gb3alt2] := Get[StringJoin[BasisDirectory[gb3alt2], 
+    "/IBP[gb3alt2]"]]
+gb3alt2 /: Information[gb3alt2] := 
+  (If[ValueQ[gb3alt2::usage], Information[gb3alt2, LongForm -> False]]; 
+   Print[Grid[Partition[Union[Replace[Replace[First /@ UpValues[gb3alt2] /. 
+          HoldPattern -> HoldForm, 
+         {HoldPattern[HoldForm[(LiteRed`Private`f$_)[gb3alt2, __]]] :> 
+           HoldForm[LiteRed`Private`f$[gb3alt2, "\[Ellipsis]"]]}, {1}], 
+        {HoldPattern[LiteRed`Private`x$:HoldForm[(LiteRed`Private`f$_)[
+              gb3alt2, ___]]] :> Button[LiteRed`Private`x$, 
+           (SelectionMove[ButtonNotebook[], All, GeneratedCell]; 
+             NotebookDelete[]; Information[Evaluate[LiteRed`Private`x$[[1,
+                0]]], LongForm -> False]; Print[TableForm[Cases[UpValues[
+                  gb3alt2], HoldPattern[LiteRed`Private`a$_ :> 
+                    LiteRed`Private`b$_] /; MatchQ[LiteRed`Private`a$[[1,0]], 
+                   LiteRed`Private`x$[[1,0]]]] /. HoldPattern -> 
+                 HoldForm]]) & , Appearance -> "Frameless", 
+           BaseStyle -> "InformationLink"]}, {1}]], 5], 
+     DefaultBaseStyle -> "InfoGrid"]])
+gb3alt2 /: jsOrder[gb3alt2] := {"np", "cp", "-ds", "-ns"}
+gb3alt2 /: LI[gb3alt2] := Get[StringJoin[BasisDirectory[gb3alt2], 
+    "/LI[gb3alt2]"]]
+gb3alt2 /: LMs[gb3alt2] := {l1, l2, q}
+gb3alt2 /: MappedSectors[gb3alt2] := 
+  Get[StringJoin[BasisDirectory[gb3alt2], "/MappedSectors[gb3alt2]"]]
+gb3alt2 /: MIs[gb3alt2] := Get[StringJoin[BasisDirectory[gb3alt2], 
+    "/MIs[gb3alt2]"]]
+gb3alt2 /: NDs[gb3alt2] := 18
+gb3alt2 /: NonZeroSectors[gb3alt2] := 
+  Get[StringJoin[BasisDirectory[gb3alt2], "/NonZeroSectors[gb3alt2]"]]
+gb3alt2 /: Parameters[gb3alt2] := {y1, y2, y4, d}
+gb3alt2 /: PowerShifts[gb3alt2] := {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+   0, 0, 0, 0}
+gb3alt2 /: SectorsMappings[gb3alt2] := {}
+gb3alt2 /: SectorsPattern[gb3alt2] := {_, _, _, _, _, _, _, _, _, 0, 0, 0, 0, 
+   0, 0, 0, 0, 0}
+gb3alt2 /: SimpleSectors[gb3alt2] := 
+  Get[StringJoin[BasisDirectory[gb3alt2], "/SimpleSectors[gb3alt2]"]]
+gb3alt2 /: SPs[gb3alt2] := {sp[a, l1], sp[a, l2], sp[a, q], sp[b, l1], 
+   sp[b, l2], sp[b, q], sp[l1, l1], sp[l1, l2], sp[l1, q], sp[l1, v1], 
+   sp[l1, v2], sp[l2, l2], sp[l2, q], sp[l2, v1], sp[l2, v2], sp[q, q], 
+   sp[q, v1], sp[q, v2]}
+gb3alt2 /: SR[gb3alt2] := Get[StringJoin[BasisDirectory[gb3alt2], 
+    "/SR[gb3alt2]"]]
+gb3alt2 /: Toj[gb3alt2] := {sp[a, l1] -> j[gb3alt2, 0, 0, 0, 0, 0, 0, 0, 0, 
+     0, 0, 0, 0, 0, 0, 0, 0, -1, 0], sp[a, l2] -> j[gb3alt2, 0, 0, 0, 0, 0, 
+     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1], 
+   sp[a, q] -> j[gb3alt2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 
+     0], sp[b, l1] -> j[gb3alt2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 
+     0, 0, 0, 0], sp[b, l2] -> j[gb3alt2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+     -1, 0, 0, 0, 0, 0, 0], sp[b, q] -> j[gb3alt2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+      -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[gb3alt2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+      0, 0, 0, 0, 0, 0, -1, 0] - j[gb3alt2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+      0, 0, 0, 0, 0, 0, -1], sp[l1, l1] -> j[gb3alt2, 0, 0, 0, 0, -1, 0, 0, 
+     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], sp[l1, l2] -> 
+    (-j[gb3alt2, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] - 
+      j[gb3alt2, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] + 
+      j[gb3alt2, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0])/2, 
+   sp[l1, q] -> j[gb3alt2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 
+     0, 0], sp[l1, v1] -> j[gb3alt2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+     -1, 0, 0, 0, 0], sp[l1, v2] -> j[gb3alt2, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+     0, 0, 0, 0, 0, 0, 0, 0], sp[l2, l2] -> j[gb3alt2, 0, 0, 0, 0, 0, -1, 0, 
+     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], sp[l2, q] -> 
+    (-j[gb3alt2, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] + 
+      j[gb3alt2, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] + 
+      j[gb3alt2, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0] - 
+      2*j[gb3alt2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0])/2, 
+   sp[l2, v1] -> j[gb3alt2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 
+     0, 0], sp[l2, v2] -> j[gb3alt2, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+     0, 0, 0, 0, 0], sp[q, q] -> j[gb3alt2, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 
+     0, 0, 0, 0, 0, 0, 0], sp[q, v1] -> j[gb3alt2, 0, 0, -1, 0, 0, 0, 0, 0, 
+     0, 0, 0, 0, 0, 0, 0, 0, 0, 0], sp[q, v2] -> j[gb3alt2, 0, 0, 0, -1, 0, 
+     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
+gb3alt2 /: UniqueSectors[gb3alt2] := 
+  Get[StringJoin[BasisDirectory[gb3alt2], "/UniqueSectors[gb3alt2]"]]
+gb3alt2 /: ZerojRule[gb3alt2] := LiteRed`Private`jjj:j[gb3alt2, __] :> 
+   0 /; Module[{LiteRed`Private`jjs = 
+       Rest[List @@ jSector[LiteRed`Private`jjj]]}, 
+     Or @@ (BitOr[LiteRed`Private`jjs, #1] === #1 & ) /@ 
+       {{1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0}}]
+gb3alt2 /: ZeroSectors[gb3alt2] := Get[StringJoin[BasisDirectory[gb3alt2], 
+    "/ZeroSectors[gb3alt2]"]]
+gb3alt2 /: SectorsMappings[gb3alt2, LiteRed`Private`ns$:(0 | 1)..] := 
+  Cases[SectorsMappings[gb3alt2], HoldPattern[
+    js[gb3alt2, LiteRed`Private`ns$] -> _]]
+gb3alt2::usage = "3-loop basis with 4 external momenta.\nUse \
+Information[gb3alt2] to get basis summary.\nThis string can be redefined by \
+setting gb3alt2::usage=\"\[Ellipsis]\""; Information[gb3alt2, 
+  LongForm -> False]; 
+LiteRed`Private`CheckDefs[gb3alt2]
+BasisDirectory[gb3alt2]
