@@ -1,0 +1,8 @@
+{{j[ga1, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+    (n5_)?NonPositive, (n6_)?NonPositive] :> 
+   Expand[j[ga1, n1, n2, n3, n4, n5, n6]]}, 
+ {j[ga1, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+    (n5_)?NonPositive, (n6_)?NonPositive] :> 
+   Expand[j[ga1, n2, n1, n3, n4, 0, 0]/
+     ((-j[ga1, 0, 0, 0, 0, -1, 0] + y5*j[ga1, 0, 0, 0, 0, 0, 0])^n5*
+      (-j[ga1, 0, 0, 0, 0, 0, -1] + y6*j[ga1, 0, 0, 0, 0, 0, 0])^n6)]}}
