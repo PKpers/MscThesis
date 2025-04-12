@@ -29,12 +29,14 @@ fc1 /: Definitions[fc1] := {Hold[MetricTensor[] === d, SetDim[d]],
       y4], Declare[y4, LiteRed`Private`ExpresionType[y4]]], 
    Hold[LiteRed`Private`ExpresionType[y5] === LiteRed`Private`ExpresionType[
       y5], Declare[y5, LiteRed`Private`ExpresionType[y5]]], 
+   Hold[LiteRed`Private`ExpresionType[y6] === LiteRed`Private`ExpresionType[
+      y6], Declare[y6, LiteRed`Private`ExpresionType[y6]]], 
    Hold[LiteRed`Private`ExpresionType[yb] === LiteRed`Private`ExpresionType[
       yb], Declare[yb, LiteRed`Private`ExpresionType[yb]]], 
    Hold[sp[a, a] === y2, sp[a, a] = y2], Hold[sp[b, b] === yb, 
     sp[b, b] = yb], Hold[sp[q, q] === y3, sp[q, q] = y3], 
    Hold[sp[v1, v1] === 1, sp[v1, v1] = 1], Hold[sp[v2, v2] === 1, 
-    sp[v2, v2] = 1], Hold[sp[a, b] === 0, sp[a, b] = 0], 
+    sp[v2, v2] = 1], Hold[sp[a, b] === y6, sp[a, b] = y6], 
    Hold[sp[a, q] === y4, sp[a, q] = y4], Hold[sp[a, v1] === 0, 
     sp[a, v1] = 0], Hold[sp[a, v2] === 0, sp[a, v2] = 0], 
    Hold[sp[b, q] === y5, sp[b, q] = y5], Hold[sp[b, v1] === 0, 
@@ -592,7 +594,7 @@ fc1 /: MIs[fc1] := Get[StringJoin[BasisDirectory[fc1], "/MIs[fc1]"]]
 fc1 /: NDs[fc1] := 13
 fc1 /: NonZeroSectors[fc1] := Get[StringJoin[BasisDirectory[fc1], 
     "/NonZeroSectors[fc1]"]]
-fc1 /: Parameters[fc1] := {y1, y2, y3, y4, y5, yb, d}
+fc1 /: Parameters[fc1] := {y1, y2, y3, y4, y5, y6, yb, d}
 fc1 /: PowerShifts[fc1] := {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 fc1 /: SectorsMappings[fc1] := 
   {js[fc1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0] -> 
